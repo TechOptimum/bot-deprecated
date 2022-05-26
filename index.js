@@ -1,10 +1,14 @@
 const { Client } = require("discord.js");
 const settings = require("./config");
-
+const keep_alive = require('./keep_alive.js')
 const client = new Client({
   intents: ["GUILDS", "GUILD_MEMBERS", "DIRECT_MESSAGES"],
 });
 
+client.on("ready", () => {
+  console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
+  client.user.setActivity(`Fortnite`);
+});
 client.on("ready", async () => {
   console.log(`Online ${client.user.tag}`);
   let guild = client.guilds.cache.get(settings.guildID);
