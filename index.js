@@ -7,8 +7,16 @@ const client = new Client({
 
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-  client.user.setActivity(`Fortnite`);
+ // client.user.setActivity(`007_link sucks`);
 });
+client.on('ready', () => {
+    setInterval(async ()=>{
+        let textList = ['Fortnite','You','Coding', 'Blocks ']
+        var text = textList[Math.floor(Math.random() * textList.length)];
+        client.user.setActivity(text , { type: 'WATCHING' })
+    },120000) // milliseconds
+});
+
 client.on("ready", async () => {
   console.log(`Online ${client.user.tag}`);
   let guild = client.guilds.cache.get(settings.guildID);
