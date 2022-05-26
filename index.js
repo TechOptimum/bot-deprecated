@@ -11,10 +11,10 @@ client.on("ready", () => {
 });
 client.on('ready', () => {
     setInterval(async ()=>{
-        let textList = ['Fortnite','You','Coding', 'Blocks ']
+        let textList = ['Fortnite','You','Coding videos', 'Donald Trump', 'The news', `Developers working on Tech Optimum`]
         var text = textList[Math.floor(Math.random() * textList.length)];
         client.user.setActivity(text , { type: 'WATCHING' })
-    },120000) // milliseconds
+    },50000) // milliseconds
 });
 
 client.on("ready", async () => {
