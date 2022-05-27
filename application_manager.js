@@ -59,15 +59,21 @@ module.exports = async (client, settings) => {
                 case "ping":
                     {
                         interaction.reply({
-                            content: `pong :: ${client.ws.ping}`,
+                            content: `Bot's ping: ${client.ws.ping}`,
                             ephemeral: true,
                         });
                     }
                     break;
-
+                case "picture":
+                    {
+                        interaction.reply({
+                            content: `picture xd`,
+                            ephemeral: true,
+                        })
+                    }
                 default:
                     interaction.reply({
-                        content: `command not found ${interaction.commandName}`,
+                        content: `Command not found:  **${interaction.commandName}**`,
                         ephemeral: true,
                     });
                     break;

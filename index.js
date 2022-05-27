@@ -32,6 +32,11 @@ client.on("ready", async () => {
                 description: `get ping of bot`,
                 type: "CHAT_INPUT",
             },
+            {
+                name: "picture",
+                description: `Get a random picture`,
+                type:"CHAT_INPUT",
+            },
         ]);
     }
     require("./application_manager")(client, settings);
