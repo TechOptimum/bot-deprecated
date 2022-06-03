@@ -42,11 +42,19 @@ module.exports = async (client, settings) => {
                             embeds: [
                                 new MessageEmbed()
                                     .setColor("BLURPLE")
-                                    .setTitle(`${interaction.guild.name}`)
-                                    .setDescription(
-                                        `> Please click on the apply button to begin the application.`)
-                                    .setFooter(`Developer Applications`)
-                                ,
+                                    .setTitle(`__Developer Applications__`)
+                                 //   .setDescription(
+                                 //       `> If you would like to apply for developer, continue reading!`)
+                      .addFields(
+		{ name: 'Requirements', value: 'You must have all the requirements below, or else your application will be denied.' },
+		{ name: '1. Ages 13-22', value: 'You must be at least 13 years old, and below 22 years old. We only allow high school & college students to apply to be a developer. ', inline: true },
+		{ name: '2. Web Development Experience', value: 'You must have at least 3 months of experience in popular website languages. ', inline: true },
+                          { name: '3. Able to commit 1-2 hours a week', value: 'You must be able to help out with development at least 1-2 hours a week, although, these are flexible times.', inline: true },
+                          {
+                              name:'\u200B', value: '> If you meet all these requirements, you may click the button below and start your application!'
+                          },
+	)
+                          ,
                             ],
                             components: [btnrow],
                         });
