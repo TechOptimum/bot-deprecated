@@ -54,6 +54,7 @@ module.exports = async (client, settings) => {
                               name:'\u200B', value: '> If you meet all these requirements, you may click the button below and start your application!'
                           },
 	)
+                                .setFooter({ text: 'Expect to receive a response within 3-6 days', iconURL: 'https://techoptimum.org/img/logo.png' })
                           ,
                             ],
                             components: [btnrow],
