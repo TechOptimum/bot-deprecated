@@ -43,19 +43,22 @@ module.exports = async (client, settings) => {
                                 new MessageEmbed()
                                     .setColor("BLURPLE")
                                     .setTitle(`__Developer Applications__`)
-                                 //   .setDescription(
-                                 //       `> If you would like to apply for developer, continue reading!`)
-                      .addFields(
-		{ name: 'Requirements', value: 'You must have all the requirements below, or else your application will be denied.' },
-		{ name: '1. Ages 13-22', value: 'You must be at least 13 years old, and below 22 years old. We only allow high school & college students to apply to be a developer. ', inline: true },
-		{ name: '2. Web Development Experience', value: 'You must have at least 3 months of experience in popular website languages. ', inline: true },
-                          { name: '3. Able to commit 1-2 hours a week', value: 'You must be able to help out with development at least 1-2 hours a week, although, these are flexible times.', inline: true },
-                          {
-                              name:'\u200B', value: '> If you meet all these requirements, you may click the button below and start your application!'
-                          },
-	)
-                                .setFooter({ text: 'Expect to receive a response within 3-6 days', iconURL: 'https://techoptimum.org/img/logo.png' })
-                          ,
+                                    //   .setDescription(
+                                    //       `> If you would like to apply for developer, continue reading!`)
+                                    .addFields(
+                                        { name: 'Requirements', value: 'You must have all the requirements below, or else your application will be denied.' },
+                                        { name: '1. Ages 13-22', value: 'We only allow high school & college students to be a part of our team! ', inline: true },
+                                        { name: '2. Web Development Experience', value: 'You must have at least 3 months of experience in popular website languages. ', inline: true },
+                                        { name: '3. Able to commit 1-2 hours a week', value: 'You must be able to help out with development at least 1-3 hours a week, although, these are flexible times.', inline: true },
+                                        {
+                                            name: '4. Have these skills:', value: '__Must Know:__\n> Familiar with NodeJs\n> Familiar with HTML\n> Familiar with CSS\n> Familiar with NextJs\n__Bonuses:__\n> Knows MongoDB\n> Has worked with Discord API', inline: false
+                                        },
+                                        {
+                                            name: '\u200B', value: '> If you meet all these requirements, you may click the button below and start your application!'
+                                        },
+                                    )
+                                    .setFooter({ text: 'Expect to receive a response within 3-6 days', iconURL: 'https://techoptimum.org/img/logo.png' })
+                                ,
                             ],
                             components: [btnrow],
                         });
@@ -134,11 +137,43 @@ module.exports = async (client, settings) => {
                             .setPlaceholder(`Share your work experience/volunteer experience`)
                             .setStyle("PARAGRAPH");
 
+                        const prg_skills = new TextInputComponent()
+                            .setCustomId("ap_prg_skills")
+                            .setLabel(`What programming languages do you know?`.substring(0, 45))
+                            .setMinLength(4)
+                            .setMaxLength(100)
+                            .setRequired(true)
+                            .setPlaceholder(`Share your programming skills/languages with us`)
+                            .setStyle("PARAGRAPH");
+
+                        const time_zone = new TextInputComponent()
+                            .setCustomId("ap_time_zone")
+                            .setLabel(`What timezone are you in?`.substring(0, 45))
+                            .setMinLength(2)
+                            .setMaxLength(30)
+                            .setRequired(true)
+                            .setPlaceholder(`Share your timezone with us`)
+                            .setStyle("PARAGRAPH");
+                        /*    const email = new TextInputComponent()
+                                .setCustomId("ap_email")
+                                .setLabel(`What is your email address?`.substring(0, 45))
+                                .setMinLength(4)
+                                .setMaxLength(50)
+                                .setRequired(true)
+                                .setPlaceholder(`Share your email with us`)
+                                .setStyle("PARAGRAPH");
+    */
+
+
+
                         let row_username = new MessageActionRow().addComponents(user_name);
                         let row_userwhy = new MessageActionRow().addComponents(user_why);
                         let row_userexperience = new MessageActionRow().addComponents(user_experience);
+                        let row_prg_skills = new MessageActionRow().addComponents(prg_skills);
+                        let row_timezone = new MessageActionRow().addComponents(time_zone);
+                        //         let row_email = new MessageActionRow().addComponents(email);
 
-                        application_modal.addComponents(row_username, row_userwhy, row_userexperience);
+                        application_modal.addComponents(row_username, row_userwhy, row_userexperience, row_prg_skills, row_timezone);
 
                         await interaction.showModal(application_modal);
                     }
@@ -193,6 +228,9 @@ module.exports = async (client, settings) => {
             let user_name = interaction.fields.getTextInputValue("ap_username");
             let user_why = interaction.fields.getTextInputValue("ap_userwhy");
             let user_experience = interaction.fields.getTextInputValue("ap_user_experience");
+            let time_zone = interaction.fields.getTextInputValue("ap_time_zone");
+            //   let email = interaction.fields.getTextInputValue("ap_email");
+            let prg_skills = interaction.fields.getTextInputValue("ap_prg_skills");
 
             let finishChannel = interaction.guild.channels.cache.get(
                 settings.finishChannel
@@ -221,20 +259,29 @@ module.exports = async (client, settings) => {
                         )
                         .addFields([
                             {
-                                name: `What is your name?`,
+                                name: `Name:`,
                                 value: `> ${user_name}`,
                             },
                             {
-                                name: `Why do you want to join staff?`,
+                                name: `They want to become a dev because:`,
                                 value: `> ${user_why}`,
                             },
                             {
-                                name: `What previous experience do you carry?`,
+                                name: `Previous experience:`,
                                 value: `> ${user_experience}`,
                             },
+                            {
+                                name: `Programming skills:`,
+                                value: `> ${prg_skills}`,
+                            },
+                            {
+                                name: `Timezone?`,
+                                value: `> ${time_zone}`,
+                            },
+
                         ])
                         .setFooter({
-                            text: `${interaction.user.id}`,
+                            text: `User ID: ${interaction.user.id} | If you are a staff member and see this application, do not accept/reject without permission!`,
                             iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
                         }),
                 ],
