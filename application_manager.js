@@ -31,7 +31,7 @@ module.exports = async (client, settings) => {
                                .setStyle("PRIMARY")
                                .setCustomId("ap_ping")
                                .setLabel("Ping me !!")
-                               .setEmoji("📶"),*/
+                               setEmoji("📶"),*/
                             new MessageButton()
                                 .setStyle("SUCCESS")
                                 .setCustomId("ap_apply")
@@ -154,15 +154,7 @@ module.exports = async (client, settings) => {
                             .setRequired(true)
                             .setPlaceholder(`Share your timezone with us`)
                             .setStyle("PARAGRAPH");
-                        /*    const email = new TextInputComponent()
-                                .setCustomId("ap_email")
-                                .setLabel(`What is your email address?`.substring(0, 45))
-                                .setMinLength(4)
-                                .setMaxLength(50)
-                                .setRequired(true)
-                                .setPlaceholder(`Share your email with us`)
-                                .setStyle("PARAGRAPH");
-    */
+      
 
 
 
@@ -171,7 +163,7 @@ module.exports = async (client, settings) => {
                         let row_userexperience = new MessageActionRow().addComponents(user_experience);
                         let row_prg_skills = new MessageActionRow().addComponents(prg_skills);
                         let row_timezone = new MessageActionRow().addComponents(time_zone);
-                        //         let row_email = new MessageActionRow().addComponents(email);
+                      
 
                         application_modal.addComponents(row_username, row_userwhy, row_userexperience, row_prg_skills, row_timezone);
 
@@ -229,7 +221,7 @@ module.exports = async (client, settings) => {
             let user_why = interaction.fields.getTextInputValue("ap_userwhy");
             let user_experience = interaction.fields.getTextInputValue("ap_user_experience");
             let time_zone = interaction.fields.getTextInputValue("ap_time_zone");
-            //   let email = interaction.fields.getTextInputValue("ap_email");
+           
             let prg_skills = interaction.fields.getTextInputValue("ap_prg_skills");
 
             let finishChannel = interaction.guild.channels.cache.get(
@@ -249,9 +241,10 @@ module.exports = async (client, settings) => {
                     .setEmoji("❌"),
             ]);
 
-            finishChannel.send({
+             finishChannel.send({
                 embeds: [
                     new MessageEmbed()
+                    
                         .setColor("BLURPLE")
                         .setTitle(`Application From ${interaction.user.tag}`)
                         .setDescription(
@@ -278,10 +271,9 @@ module.exports = async (client, settings) => {
                                 name: `Timezone?`,
                                 value: `> ${time_zone}`,
                             },
-
-                        ])
+                         ])
                         .setFooter({
-                            text: `User ID: ${interaction.user.id} | If you are a staff member and see this application, do not accept/reject without permission!`,
+                            text: `${interaction.user.id}`,
                             iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
                         }),
                 ],
